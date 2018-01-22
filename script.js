@@ -1,20 +1,21 @@
-const decimal = [1, 5, 10, 50, 100, 500, 1000];
-const roman = ['I', 'V', 'X', 'L', 'C', 'D', 'M'];
+import { getCharMap } from './utils'
 
-function getMap(char) {
-  let romanIndex = roman.indexOf(char);
-  return decimal[romanIndex];
-}
-
+/**
+ * converts a roman number to arabic number
+ * @param romanNumber
+ * @returns {number}
+ */
 export function romanToArabic(romanNumber) {
   let sum = 0;
   let len = romanNumber.length - 1;
   for (let i = 0; i < len; i++) {
-    if (getMap(romanNumber.charAt(i)) < getMap(romanNumber.charAt(i + 1))) {
-          sum -= getMap(romanNumber.charAt(i));
+    if (getCharMap(romanNumber.charAt(i)) < getCharMap(romanNumber.charAt(i + 1))) {
+          sum -= getCharMap(romanNumber.charAt(i));
       } else {
-          sum += getMap(romanNumber.charAt(i));
+          sum += getCharMap(romanNumber.charAt(i));
       }
   }
-  return sum += getMap(romanNumber.charAt(len));
+  sum += getCharMap(romanNumber.charAt(len));
+
+  return sum;
 }
